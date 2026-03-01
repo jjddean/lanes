@@ -1,0 +1,20 @@
+[
+    {
+        "companyName": "Example Importer Ltd",
+        "country": "Turkey",
+        "industry": "Textiles",
+        "laneOrigin": "Istanbul",
+        "laneDestination": "London",
+        "whatsapp": "+90500000000",
+        "email": "contact@example.com"
+    },
+    {
+        "companyName": "Global Trade Corp",
+        "country": "Vietnam",
+        "industry": "Electronics",
+        "laneOrigin": "Ho Chi Minh City",
+        "laneDestination": "Los Angeles",
+        "whatsapp": "+84900000000",
+        "email": "info@globaltrade.vn"
+    }
+]

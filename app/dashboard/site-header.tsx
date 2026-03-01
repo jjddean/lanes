@@ -8,11 +8,21 @@ function getPageTitle(pathname: string): string {
   // Handle exact matches first
   switch (pathname) {
     case "/dashboard":
-      return "Dashboard"
-    case "/dashboard/payment-gated":
-      return "Payment gated"
+      return "Command Center"
+    case "/dashboard/leads":
+      return "Lanes"
+    case "/dashboard/inbox":
+      return "Inbox"
+    case "/dashboard/engine":
+      return "Engine"
+    case "/dashboard/deals":
+      return "Wins"
+    case "/dashboard/billing":
+      return "Billing"
+    case "/admin":
+      return "Admin Console"
     default:
-      return "Page"
+      return "LanesAI"
   }
 }
 

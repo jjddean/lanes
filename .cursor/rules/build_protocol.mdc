@@ -1,0 +1,276 @@
+---
+description: 🧠 ANTIGRAVITY BUILD PROTOCOL - AI Freight Outbound SaaS
+globs: **/*
+---
+
+# 🧠 ANTIGRAVITY BUILD PROTOCOL
+
+For: AI Freight Outbound SaaS
+Stack: Next.js + Clerk + Convex + Stripe + Resend + WhatsApp + OpenAI
+
+## 1️⃣ CORE PRINCIPLE
+
+Build the smallest production-ready system that:
+- Sends automated outbound
+- Tracks replies
+- Automates follow-ups
+- Has unified inbox
+- Is secure
+- Is scalable
+
+No feature creep.
+No marketing pages.
+No unnecessary abstractions.
+
+## 2️⃣ DEVELOPMENT PHASE ORDER (MANDATORY)
+
+Antigravity must follow this exact order:
+
+### Phase 1 – Data & Auth
+- Convex schema
+- Clerk integration
+- Organization model
+- Role-based access
+- NO UI beyond basic layout until schema is stable.
+
+### Phase 2 – Messaging Core
+- Lead model (limit to ~300 companies per country initially)
+- Campaign model
+- Message queue system
+- WhatsApp provider wrapper
+- Email provider wrapper
+- Webhook handlers
+- Status tracking
+- Only after messaging works end-to-end move forward.
+
+### Phase 3 – AI Layer
+- Message generation wrapper
+- Reply classification
+- AI reply suggestion
+- Caching layer for generations
+- AI must be isolated in `/providers/openai.ts`.
+
+### Phase 4 – Automation Engine
+- Follow-up logic
+- Behavior rules
+- Rate limiting
+- Retry logic
+
+### Phase 5 – Billing
+- Stripe Checkout
+- Webhook
+- Entitlement enforcement
+- Usage tracking
+
+## 3️⃣ ARCHITECTURE RULES
+
+Antigravity must follow:
+
+### A. Convex Is Source of Truth
+UI never assumes state.
+Everything reads from Convex.
+
+### B. All Providers Wrapped
+Create:
+`convex/providers/`
+- `whatsapp.ts` (Meta WhatsApp Cloud API)
+- `email.ts` (Resend)
+- `openai.ts`
+- `stripe.ts`
+
+No provider logic inside UI or random files.
+
+### C. Idempotency Required
+Every outbound message must include:
+- `idempotencyKey`
+- `providerMessageId`
+- `status lifecycle`
+
+No duplicate sends allowed.
+
+### D. Webhooks Must Be:
+- Signature verified
+- Idempotent
+- Safe against replay
+- Logged minimally
+
+## 4️⃣ DATA MODEL RULES
+
+### Lead Storage & Scale
+- **Master List**: Master leads (300 per country across 10 countries, total ~3,000) are stored externally.
+- **Activation**: Leads are inserted into Convex ONLY when a campaign targeting them is started.
+- **Cleanup**: Inactive leads with no replies are archived to maintain system performance.
+
+Mandatory tables:
+- `organizations`
+- `users`
+- `leads`
+- `campaigns`
+- `messages`
+- `replies`
+- `messageQueue`
+- `events`
+- `entitlements`
+
+Every table must:
+- Have indexes
+- Validate input with zod
+- Enforce org ownership
+
+## 5️⃣ MESSAGE QUEUE PROTOCOL
+
+Never send messages directly from UI.
+
+Flow:
+1. Campaign creates messages
+2. Messages inserted into `messageQueue`
+3. Background worker processes queue
+4. Provider sends
+5. Status updated
+6. Event written
+
+Retry logic:
+- 3 attempts max
+- Exponential backoff
+- Permanent failures marked
+
+## 6️⃣ AI COST CONTROL PROTOCOL
+
+Antigravity must:
+- Generate messages once per lead per campaign
+- Cache results
+- Enforce character limits
+- Never re-generate unnecessarily
+- Log token usage
+
+## 7️⃣ SECURITY PROTOCOL
+
+Required:
+- Clerk auth validation on every mutation
+- Org-based access control
+- Webhook signature verification
+- No raw PII logging
+- No secrets in Convex
+
+## 8️⃣ UX RULE
+
+System must work with:
+Minimum required inputs:
+- Company name
+- Sender identity
+- Connected WhatsApp
+- Connected email
+
+Everything else defaulted.
+No configuration overload.
+
+## 9️⃣ CODE QUALITY RULES
+
+Antigravity must:
+- Use TypeScript strict mode
+- Avoid `any`
+- Use `async/await` only
+- No unused exports
+- No commented dead code
+- No UI fetching providers directly
+- Server-side only for sending
+
+## 🔟 FAILURE HANDLING RULES
+
+All failures must:
+- Be caught
+- Be logged
+- Update message status
+- Not crash worker
+
+## 11️⃣ TEST MODE REQUIRED
+
+Add: `TEST_MODE=true`
+
+When enabled:
+- No real messages sent
+- Provider calls mocked
+- Webhooks simulated
+- This prevents accidental spam during dev.
+
+## 12️⃣ WHAT ANTIGRAVITY MUST NOT DO
+
+- Do not add Redis
+- Do not add Prisma
+- Do not add unnecessary background systems
+- Do not introduce microservices
+- Do not redesign architecture mid-build
+- Do not over-engineer abstractions
+
+Keep stack minimal.
+
+## 🧩 OPTIONAL BUT SMART
+
+After core is stable:
+- Add feature flags
+- Add admin debug panel
+- Add message health score
+- Add basic analytics dashboard
+- Only after stable messaging.
+
+## 🚀 FIRST TIME USER FLOW (DAY 1)
+
+Follow this exact flow for the onboarding experience:
+
+1. **Step 1: Sign Up**
+   - Login with Clerk.
+   - Create company profile (name, website, main trade lane).
+   - Connect WhatsApp number (Meta API) and Email (Resend).
+
+2. **Step 2: Choose Target**
+   - User selects: Target (Importer/Exporter/etc), Lane (Origin/Destination), and Industry.
+   - User clicks **Start Campaign**.
+   - *Constraint*: No message editing or template configuration at this stage.
+
+3. **Step 3: System Takes Over**
+   - Leads are selected automatically.
+   - AI generates personalized messages.
+   - Messages are queued and sends start daily.
+
+## 📥 DAILY USE SCENARIO
+
+- **Dashboard**: Shows send/delivery/reply/interest stats.
+- **Inbox**: Unified view with AI-detected intent and suggested replies. One-click send.
+- **Pipeline**: Drag-and-drop leads through stages (Lead -> Replied -> Qualified -> Quoting -> Won).
+
+## 🏁 DEFINITION OF DONE (FINISHED STATE)
+
+The system is considered "finished" when:
+- [ ] Create org + connect channels (WhatsApp + email) ✅
+- [ ] Import/add leads ✅
+- [ ] Create campaign → generates messages → queues sends ✅
+- [ ] Worker sends + updates statuses via webhook ✅
+- [ ] Replies appear in unified inbox ✅
+- [ ] AI suggests reply + intent label ✅
+- [ ] Follow-up automation runs ✅
+- [ ] Stripe plan gates sending limits ✅
+- [ ] TEST_MODE works end-to-end (no real sends) ✅
+
+## 🛠️ PR & COMMIT RULES
+
+- **One feature per PR**: Keep changes focused and atomic.
+- **CHANGELOG required**: Every PR must include a short entry in `CHANGELOG.md`.
+- **Mandatory Tests**: Include at least 1 test for any webhook, queue, or rate-limit changes.
+- **Dependency Control**: No new dependencies unless explicitly justified in the PR description.
+
+## 🛑 STOP CONDITIONS (ASK USER)
+
+Antigravity must stop and ask for clarification before:
+- Any schema change that deletes or renames fields.
+- Choosing between provider platforms (e.g., Twilio vs Meta) if not explicitly decided.
+- Any pricing or billing logic assumptions.
+- Any UI redesign beyond basic functional layouts.
+
+## 🔥 FINAL INSTRUCTION TO ANTIGRAVITY
+
+Build production-safe outbound infrastructure.
+
+Stability > fancy UI
+Correct state > speed
+Security > features
+Automation > customization

@@ -1,0 +1,52 @@
+{
+    "lanes": {
+        "Vietnam to USA": {
+            "insights": [
+                "Severe Port Congestion at Cat Lai (HCM): Expect 3-5 day vessel berthing delays.",
+                "Customs Fluidity: Regulatory changes for textiles require meticulous HS Code classification to avoid fines.",
+                "LCL Advantage: Small shippers can bypass full container shortages by using consolidated weekly sailings.",
+                "Infrastructure: Expressway development toward Hai Phong is improving lead times for Northern industrial zones."
+            ],
+            "pain_points": [
+                "Lack of visibility into road transport from industrial zones to port.",
+                "High demurrage fees for new shippers unfamiliar with clearance timelines.",
+                "Vessel rerouting due to Red Sea tensions adding 10-15 days to transit."
+            ]
+        },
+        "India to EU": {
+            "insights": [
+                "Mumbai/JNPT Congestion: Direct rail access to port is currently under maintenance, causing truck queues.",
+                "Trade Agreement Benefits: New India-EU FTA discussions provide potential duty drawbacks for automotive parts.",
+                "Customs: Errors in classification often lead to 20-day delays at Mumbai ports."
+            ],
+            "pain_points": [
+                "Complex documentation for specialized machinery exports.",
+                "Fluctuating fuel surcharges on ocean freight.",
+                "Security risks (theft/vandalism) in specific inland transit corridors."
+            ]
+        },
+        "Africa Regional": {
+            "insights": [
+                "Lagos/Durban Congestion: Major bottlenecks often caused by outdated facilities; prioritize smaller ports if possible.",
+                "Fragmentation: Multi-operator logistics landscape requires local 'boots on the ground' for transparency."
+            ],
+            "pain_points": [
+                "Inconsistent customs regulations across borders.",
+                "High security risks and potential cargo theft in unstable transit zones."
+            ]
+        }
+    },
+    "general": {
+        "new_shippers": {
+            "advice": [
+                "Standardize documentation early (Invoice/Packing List) to avoid administrative 'red tape'.",
+                "Prioritize 'Predictability' over 'Lowest Cost' to build initial supply chain reliability.",
+                "Always verify HS Codes twice for emerging market exports.",
+                "Invest in local partnerships for faster customs clearance."
+            ]
+        }
+    },
+    "response_templates": {
+        "propose_strategy": "Hi {{companyName}}, following up on our discovery. For your {{industry}} shipments on the {{laneOrigin}} to {{laneDestination}} route, I've identified a key strategic move: {{strategicReasoning}}. Specifically, {{insight}}. Our team at Elite specialized in navigating {{pain_point}} for new shippers. Would you like to see a custom quote based on this approach? {{senderName}}, {{senderRole}}"
+    }
+}

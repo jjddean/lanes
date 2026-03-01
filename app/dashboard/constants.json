@@ -1,0 +1,38 @@
+{
+    "regions": [
+        "India",
+        "Pakistan",
+        "Bangladesh",
+        "Vietnam",
+        "China",
+        "Brazil",
+        "Mexico",
+        "Caribbean",
+        "Africa-East",
+        "Africa-West",
+        "Africa-South",
+        "Turkey",
+        "UK",
+        "USA",
+        "EU"
+    ],
+    "industries": [
+        "Electronics",
+        "Textiles",
+        "Automotive",
+        "Chemicals",
+        "Food & Beverage",
+        "Pharmaceuticals",
+        "Machinery",
+        "Furniture"
+    ],
+    "leadStatuses": [
+        "new",
+        "contacted",
+        "replied",
+        "qualified",
+        "won",
+        "lost",
+        "unsubscribed"
+    ]
+}

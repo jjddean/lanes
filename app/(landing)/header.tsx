@@ -8,7 +8,7 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 
 import { Authenticated, Unauthenticated, AuthLoading } from "convex/react";
-import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 
 import { dark } from '@clerk/themes'
 import { useTheme } from "next-themes"
@@ -98,48 +98,32 @@ export const HeroHeader = () => {
                                         <Loader2 className="size-8 p-2 animate-spin" />
                                     </div>
                                 </AuthLoading>
-                                <Authenticated>
+                                <SignedIn>
                                     <Button asChild size="sm">
                                         <Link href="/dashboard">
                                             <span>Dashboard</span>
                                         </Link>
                                     </Button>
                                     <UserButton appearance={appearance} />
-                                </Authenticated>
+                                </SignedIn>
 
-                                <Unauthenticated>
+                                <SignedOut>
                                     <SignInButton mode="modal">
                                         <Button
-                                            asChild
                                             variant="outline"
                                             size="sm"
                                             className={cn(isScrolled && 'lg:hidden')}>
-                                            <Link href="#">
-                                                <span>Login</span>
-                                            </Link>
+                                            <span>Login</span>
                                         </Button>
                                     </SignInButton>
                                     <SignUpButton mode="modal">
                                         <Button
-                                            asChild
                                             size="sm"
-                                            className={cn(isScrolled && 'lg:hidden')}>
-                                            <Link href="#">
-                                                <span>Sign Up</span>
-                                            </Link>
+                                            className={cn(isScrolled ? 'lg:inline-flex' : '')}>
+                                            <span>Get Started</span>
                                         </Button>
                                     </SignUpButton>
-                                    <SignUpButton mode="modal">
-                                        <Button
-                                            asChild
-                                            size="sm"
-                                            className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
-                                            <Link href="#">
-                                                <span>Get Started</span>
-                                            </Link>
-                                        </Button>
-                                    </SignUpButton>
-                                </Unauthenticated>
+                                </SignedOut>
                             </div>
                         </div>
                     </div>

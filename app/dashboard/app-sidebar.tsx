@@ -22,9 +22,7 @@ import {
   IconBrandOpenai,
 } from "@tabler/icons-react"
 
-import { NavDocuments } from "@/app/dashboard/nav-documents"
 import { NavMain } from "@/app/dashboard/nav-main"
-import { NavSecondary } from "@/app/dashboard/nav-secondary"
 import { NavUser } from "@/app/dashboard/nav-user"
 import {
   Sidebar,
@@ -47,43 +45,29 @@ const data = {
       icon: IconDashboard,
     },
     {
-      title: "Payment gated",
-      url: "/dashboard/payment-gated",
+      title: "Engine",
+      url: "/dashboard/engine",
       icon: IconSparkles,
     },
-  ],
-  navSecondary: [
     {
-      title: "Settings",
-      url: "#",
-      icon: IconSettings,
+      title: "Lanes",
+      url: "/dashboard/leads",
+      icon: IconUsers,
     },
     {
-      title: "Get Help",
-      url: "#",
-      icon: IconHelp,
+      title: "Inbox",
+      url: "/dashboard/inbox",
+      icon: IconMessageCircle,
     },
     {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
+      title: "Wins",
+      url: "/dashboard/deals",
+      icon: IconFileDescription,
     },
-  ],
-  documents: [
     {
-      name: "Data Library",
-      url: "#",
+      title: "Billing",
+      url: "/dashboard/billing",
       icon: IconDatabase,
-    },
-    {
-      name: "Reports",
-      url: "#",
-      icon: IconReport,
-    },
-    {
-      name: "Word Assistant",
-      url: "#",
-      icon: IconFileWord,
     },
   ],
 }
@@ -100,8 +84,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             >
               <Link href="/">
                 <ChatMaxingIconColoured className="!size-6" />
-                <span className="text-base font-semibold">Starter DIY</span>
-                <Badge variant="outline" className="text-muted-foreground  text-xs">Demo</Badge>
+                <span className="text-base font-semibold">LanesAI</span>
+                <Badge variant="outline" className="text-cyan-600 border-cyan-200 bg-cyan-50 text-xs uppercase tracking-tight">Active Engine</Badge>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -109,8 +93,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />

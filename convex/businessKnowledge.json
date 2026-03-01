@@ -1,0 +1,76 @@
+{
+    "industries": {
+        "Electronics": {
+            "scaling_signals": [
+                "Transitioning from LCL to FCL due to volume growth.",
+                "Shifting from air freight back to ocean to optimize cost-per-unit.",
+                "Scaling manufacturing in Northern Vietnam (Hai Phong area)."
+            ],
+            "struggling_signals": [
+                "High demurrage/detention costs due to clearance delays.",
+                "Capital tied up in 'safety stock' due to unreliable lead times.",
+                "Loss of retail contracts due to shipment unpredictability."
+            ],
+            "business_pain_points": [
+                "Inventory tie-up due to transit unpredictability.",
+                "High insurance costs for premium components.",
+                "Need for specialized electronics-grade warehousing."
+            ]
+        },
+        "Textiles": {
+            "scaling_signals": [
+                "Seasonal volume spikes requiring guaranteed space.",
+                "Shifting sourcing from China to Vietnam/India to benefit from FTAs.",
+                "Direct-to-Warehouse shipping models for UK retailers."
+            ],
+            "struggling_signals": [
+                "Heavy fines from missed documentation deadlines.",
+                "Overpaying on air-freight to make up for manufacturing delays.",
+                "Redundant logistics costs due to lack of shipment consolidation."
+            ],
+            "business_pain_points": [
+                "Meticulous HS Code classification leading to heavy fines if missed.",
+                "Compressed lead times for seasonal fashion launches.",
+                "Complex documentation for origin certification."
+            ]
+        }
+    },
+    "trade_scenarios": {
+        "uk_eu_bidirectional": {
+            "import_to_uk": {
+                "signals": [
+                    "Post-Brexit customs brokerage gaps",
+                    "EU distribution hub needs"
+                ],
+                "value_case": "Specialized UK customs and fiscal representation."
+            },
+            "export_from_uk": {
+                "signals": [
+                    "UK manufacturing export growth",
+                    "EU last-mile delivery failures"
+                ],
+                "value_case": "Predictable door-to-door EU delivery."
+            }
+        },
+        "emerging_market_partner": {
+            "agency_seeker": {
+                "signals": [
+                    "Regional forwarder needing UK 'Boots on the Ground'",
+                    "Customs gap for specific industry Pharma/Textile"
+                ],
+                "value_case": "Complementary UK infrastructure support."
+            }
+        }
+    },
+    "qualification_rules": {
+        "tier_1_growth": "Scaling volume needing professional FCL management.",
+        "tier_1_fix": "Supply chain failure needing urgent bridge or optimization.",
+        "tier_1_partner": "Regional agent seeking inter-lane partner for UK/EU legs.",
+        "red_flag": "One-off individual shippers without recurring volume."
+    },
+    "logic_templates": {
+        "propose_strategy_growth": "Hi {{companyName}}, based on your scaling activity on the {{laneOrigin}} to {{laneDestination}} route, I've identified a margin opportunity through volume consolidation. Specifically, {{strategicCase}}. Would a comparison against your current setup be useful?",
+        "propose_strategy_fix": "Hi {{companyName}}, analyzing your current shipping pattern on the {{laneOrigin}} to {{laneDestination}} route, there appears to be a significant cost-leak in your clearance cycle. We specialize in eliminating {{pain_point}} for companies in your industry. Interested in a brief technical review?",
+        "propose_partnership": "Hi {{companyName}}, I noticed your focus on the {{laneOrigin}} to {{laneDestination}} trade. We are specialists in UK customs and last-mile for {{industry}}. I believe our infrastructure would perfectly complement your regional operations. Are you open to a partnership discussion?"
+    }
+}

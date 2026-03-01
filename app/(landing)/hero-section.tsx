@@ -1,9 +1,12 @@
+"use client";
+
 import React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { HeroHeader } from "./header"
 import { Sparkle } from 'lucide-react'
+import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
 
 export default function HeroSection() {
     return (
@@ -15,7 +18,7 @@ export default function HeroSection() {
                         <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
                             <div>
                                 <Link
-                                    href="#"
+                                    href="/"
                                     className="hover:bg-foreground/5 mx-auto flex w-fit items-center justify-center gap-2 rounded-md py-0.5 pl-1 pr-3 transition-colors duration-150">
                                     <div
                                         aria-hidden
@@ -30,18 +33,26 @@ export default function HeroSection() {
                                 <p className="text-muted-foreground mx-auto my-6 max-w-xl text-balance text-xl">Craft. Build. Ship Modern Websites With AI Support.</p>
 
                                 <div className="flex items-center justify-center gap-3">
-                                    <Button
-                                        asChild
-                                        size="lg">
-                                        <Link href="#link">
-                                            <span className="text-nowrap">Start Building</span>
-                                        </Link>
-                                    </Button>
+                                    <SignedIn>
+                                        <Button asChild size="lg">
+                                            <Link href="/dashboard">
+                                                <span className="text-nowrap">Go to Dashboard</span>
+                                            </Link>
+                                        </Button>
+                                    </SignedIn>
+                                    <SignedOut>
+                                        <SignInButton mode="modal">
+                                            <Button size="lg">
+                                                <span className="text-nowrap">Start Building</span>
+                                            </Button>
+                                        </SignInButton>
+                                    </SignedOut>
+
                                     <Button
                                         asChild
                                         size="lg"
                                         variant="outline">
-                                        <Link href="#link">
+                                        <Link href="https://youtube.com" target="_blank">
                                             <span className="text-nowrap">Watch Video</span>
                                         </Link>
                                     </Button>
