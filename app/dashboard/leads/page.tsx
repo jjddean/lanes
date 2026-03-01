@@ -167,7 +167,7 @@ export default function LeadsPage() {
                                             <span>{lead.companyName}</span>
                                             {lead.industry?.toLowerCase().includes("tech") && <IconRocket className="size-3 text-cyan-500" title="Scaling Milestone" />}
                                             {lead.country === "Vietnam" && <IconUsersGroup className="size-3 text-indigo-500" title="Strategic Partner" />}
-                                            {lead.status === "new" && <IconAlertTriangle className="size-3 text-amber-500" title="Optimization Opportunity" />}
+                                            {lead.status === "new" && <IconAlertTriangle className="size-3 text-amber-500 animate-pulse" title="Optimization Opportunity" />}
                                         </div>
                                         <span className="text-[10px] text-slate-400 font-normal tracking-tight truncate max-w-[150px]">{lead.whatsapp || lead.email}</span>
                                     </div>
@@ -180,7 +180,10 @@ export default function LeadsPage() {
                                 </TableCell>
                                 <TableCell className="text-slate-500 font-normal py-4 text-xs">{lead.industry}</TableCell>
                                 <TableCell className="py-4">
-                                    <Badge variant="outline" className="rounded-lg px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider bg-slate-50 border-slate-200 text-slate-600">
+                                    <Badge variant="outline" className={`rounded-lg px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider ${lead.dctsStatus === 'LDC' ? 'bg-indigo-50 border-indigo-200 text-indigo-600' :
+                                            lead.dctsStatus === 'ENHANCED' ? 'bg-slate-100 border-slate-200 text-slate-800' :
+                                                'bg-slate-50 border-slate-200 text-slate-600'
+                                        }`}>
                                         {lead.dctsStatus || "CHECKING"}
                                     </Badge>
                                 </TableCell>

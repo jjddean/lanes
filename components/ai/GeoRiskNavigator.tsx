@@ -75,9 +75,11 @@ export const GeoRiskNavigator: React.FC<GeoRiskNavigatorProps> = ({ data, route 
 
                     <div className="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded border border-slate-200">
                         <div className={`h-2 w-2 rounded-full ${data.level === 'LOW' ? 'bg-slate-400' :
-                                data.level === 'MEDIUM' ? 'bg-slate-600' : 'bg-slate-900'
+                            data.level === 'MEDIUM' ? 'bg-amber-500' : 'bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.3)]'
                             }`} />
-                        <span className="text-xs font-semibold tracking-tighter">{data.level} RISK</span>
+                        <span className={`text-xs font-semibold tracking-tighter ${data.level === 'HIGH' ? 'text-rose-600' :
+                                data.level === 'MEDIUM' ? 'text-amber-600' : ''
+                            }`}>{data.level} RISK</span>
                         <span className="text-xs font-light text-slate-400">|</span>
                         <span className="text-xs font-bold">{data.score}/100</span>
                     </div>
@@ -110,7 +112,10 @@ export const GeoRiskNavigator: React.FC<GeoRiskNavigatorProps> = ({ data, route 
                                     <motion.div
                                         initial={{ width: 0 }}
                                         animate={{ width: `${factor.score}%` }}
-                                        className="h-full bg-slate-600"
+                                        className={`h-full ${factor.score >= 70 ? 'bg-rose-500' :
+                                                factor.score >= 40 ? 'bg-amber-500' :
+                                                    'bg-slate-600'
+                                            }`}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-1 mt-1">
@@ -136,7 +141,7 @@ export const GeoRiskNavigator: React.FC<GeoRiskNavigatorProps> = ({ data, route 
                 {/* Right: Actions & Tools */}
                 <div className="col-span-4 flex flex-col gap-3">
                     <div className="border border-slate-200 rounded bg-white overflow-hidden shadow-sm">
-                        <div className="bg-slate-900 px-3 py-2 flex items-center justify-between">
+                        <div className={`bg-slate-900 px-3 py-2 flex items-center justify-between ${isPremium ? 'border-b border-white/10' : ''}`}>
                             <span className="text-[9px] uppercase tracking-widest text-white font-medium">Elite Premium</span>
                             <Lock className="h-2.5 w-2.5 text-slate-400" />
                         </div>
