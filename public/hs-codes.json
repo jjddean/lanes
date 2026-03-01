@@ -1,0 +1,54 @@
+[
+    {
+        "c": "01012100",
+        "d": "Horses, live, pure-bred breeding animals"
+    },
+    {
+        "c": "01012900",
+        "d": "Horses, live, other than pure-bred"
+    },
+    {
+        "c": "01013000",
+        "d": "Asses, mules and hinnies, live"
+    },
+    {
+        "c": "01022100",
+        "d": "Cattle, live, pure-bred breeding animals"
+    },
+    {
+        "c": "01022910",
+        "d": "Cattle, live, other than pure-bred (heifers)"
+    },
+    {
+        "c": "01051111",
+        "d": "Fowls of the species Gallus domesticus, pure-bred"
+    },
+    {
+        "c": "84713000",
+        "d": "Portable automatic data-processing machines, < 10kg"
+    },
+    {
+        "c": "84714100",
+        "d": "Other automatic data-processing machines, comprising in the same housing"
+    },
+    {
+        "c": "84717050",
+        "d": "Hard disk drives"
+    },
+    {
+        "c": "85171300",
+        "d": "Smartphones for cellular networks"
+    },
+    {
+        "c": "85235110",
+        "d": "Solid-state non-volatile storage devices (SSD)"
+    },
+    {
+        "c": "85235200",
+        "d": "Smart cards"
+    },
+    {
+        "c": "97050000",
+        "d": "Collections and collectors' pieces of zoological..."
+    }
+]

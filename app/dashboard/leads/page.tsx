@@ -6,8 +6,9 @@ import { Id } from "@/convex/_generated/dataModel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { GeoRiskNavigator } from "@/components/ai/GeoRiskNavigator";
-import { IconAward, IconPlus, IconDownload, IconUsers, IconTrash, IconMail, IconBrandWhatsapp, IconBuilding, IconMapPin, IconTag, IconEdit, IconCheck, IconX, IconRocket, IconAlertTriangle, IconRefresh, IconCircle, IconUsersGroup } from "@tabler/icons-react";
+import { IconAward, IconPlus, IconDownload, IconUsers, IconTrash, IconMail, IconBrandWhatsapp, IconBuilding, IconMapPin, IconTag, IconEdit, IconCheck, IconX, IconRocket, IconAlertTriangle, IconRefresh, IconCircle, IconUsersGroup, IconActivity, IconArrowDownLeft, IconFileDescription } from "@tabler/icons-react";
 import { toast } from "sonner";
+import Link from "next/link";
 import {
     Table,
     TableBody,
@@ -29,17 +30,19 @@ import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 
 export default function LeadsPage() {
     const leads = useQuery(api.leads.listLeads, {});
     const workflows = useQuery(api.workflows.listActiveWorkflows);
     const updateLead = useMutation(api.leads.updateLead);
     const deleteLead = useMutation(api.leads.deleteLead);
+    const generateDoc = useMutation(api.compliance.generateDocDraft);
 
     const [selectedLead, setSelectedLead] = useState<any>(null);
+    const complianceDocs = useQuery(api.compliance.getDocsForLead, selectedLead ? { leadId: selectedLead._id } : "skip" as any);
     const [isEditing, setIsEditing] = useState(false);
     const [editData, setEditData] = useState<any>({});
-    const [isAnalyzing, setIsAnalyzing] = useState(false);
 
     useEffect(() => {
         if (selectedLead) {
@@ -50,15 +53,6 @@ export default function LeadsPage() {
                 whatsapp: selectedLead.whatsapp || "",
                 email: selectedLead.email || "",
             });
-
-            // Simulate "Deep Reasoning" for new leads
-            if (selectedLead.status === 'new') {
-                setIsAnalyzing(true);
-                const timer = setTimeout(() => setIsAnalyzing(false), 3000);
-                return () => clearTimeout(timer);
-            } else {
-                setIsAnalyzing(false);
-            }
         }
     }, [selectedLead]);
 
@@ -116,27 +110,38 @@ export default function LeadsPage() {
 
     return (
         <div className="flex flex-col gap-4 p-4 lg:p-6">
-            <div className="flex items-center justify-between">
+            <div className="flex items-start justify-between">
                 <div className="flex flex-col gap-1">
-                    <h2 className="text-3xl font-bold tracking-tight text-slate-900 leading-none">Lanes</h2>
+                    <h1 className="text-3xl font-bold tracking-tight text-slate-900 leading-none">Lanes</h1>
                     <p className="text-muted-foreground font-medium uppercase tracking-widest text-[10px] mt-1">
-                        Orchestrate active trade lanes and autonomous connections.
+                        ORCHESTRATE ACTIVE TRADE LANES AND AUTONOMOUS CONNECTIONS
                     </p>
                 </div>
                 <div className="flex items-center gap-2">
                     <Button
                         variant="outline"
                         size="sm"
-                        className="h-10 px-4 rounded-lg bg-white hover:bg-slate-50 text-slate-900 font-bold border border-slate-200 transition-all flex items-center gap-2 text-xs shadow-sm"
+                        className="h-9 px-4 rounded-lg bg-white hover:bg-slate-50 text-slate-900 font-medium border border-slate-200 transition-all flex items-center gap-2 text-[10px] uppercase tracking-widest shadow-none"
+                        asChild
                     >
-                        <IconDownload className="size-4" />
+                        <Link href="/dashboard/compliance">
+                            <IconFileDescription className="size-3.5" />
+                            Compliance
+                        </Link>
+                    </Button>
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        className="h-9 px-4 rounded-lg bg-white hover:bg-slate-50 text-slate-900 font-medium border border-slate-200 transition-all flex items-center gap-2 text-[10px] uppercase tracking-widest shadow-none"
+                    >
+                        <IconDownload className="size-3.5" />
                         Export
                     </Button>
                     <Button
                         size="sm"
-                        className="h-10 px-4 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-900 font-bold border border-slate-300 transition-all flex items-center gap-2 text-xs shadow-sm"
+                        className="h-9 px-4 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-medium transition-all flex items-center gap-2 text-[10px] uppercase tracking-widest shadow-sm"
                     >
-                        <IconPlus className="size-4" />
+                        <IconPlus className="size-3.5" />
                         New Lead
                     </Button>
                 </div>
@@ -146,12 +151,12 @@ export default function LeadsPage() {
                 <Table>
                     <TableHeader>
                         <TableRow className="hover:bg-transparent border-b-slate-100">
-                            <TableHead className="font-semibold text-slate-400 uppercase tracking-widest text-[10px] h-12">Company</TableHead>
-                            <TableHead className="font-semibold text-slate-400 uppercase tracking-widest text-[10px] h-12">Country</TableHead>
-                            <TableHead className="font-semibold text-slate-400 uppercase tracking-widest text-[10px] h-12">Industry</TableHead>
-                            <TableHead className="font-semibold text-slate-400 uppercase tracking-widest text-[10px] h-12">DCTS Tier</TableHead>
-                            <TableHead className="font-semibold text-slate-400 uppercase tracking-widest text-[10px] h-12">Status</TableHead>
-                            <TableHead className="text-right font-semibold text-slate-400 uppercase tracking-widest text-[10px] h-12 pr-8">IQ Score</TableHead>
+                            <TableHead className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest h-11 px-6">COMPANY ENTITY</TableHead>
+                            <TableHead className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest h-11">REGION</TableHead>
+                            <TableHead className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest h-11">SECTOR</TableHead>
+                            <TableHead className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest h-11">DCTS LOGIC</TableHead>
+                            <TableHead className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest h-11">LIFECYCLE</TableHead>
+                            <TableHead className="text-right text-[10px] font-semibold text-muted-foreground uppercase tracking-widest h-11 pr-8">IQ SCORE</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -161,15 +166,14 @@ export default function LeadsPage() {
                                 className="cursor-pointer hover:bg-slate-50/50 border-b-slate-50 transition-colors group"
                                 onClick={() => setSelectedLead(lead)}
                             >
-                                <TableCell className="font-semibold text-slate-900 py-4 tracking-tight">
-                                    <div className="flex flex-col">
+                                <TableCell className="py-5 px-6">
+                                    <div className="flex flex-col gap-0.5">
                                         <div className="flex items-center gap-2">
-                                            <span>{lead.companyName}</span>
-                                            {lead.industry?.toLowerCase().includes("tech") && <IconRocket className="size-3 text-slate-500" title="Scaling Milestone" />}
-                                            {lead.country === "Vietnam" && <IconUsersGroup className="size-3 text-indigo-500" title="Strategic Partner" />}
-                                            {lead.status === "new" && <IconAlertTriangle className="size-3 text-amber-500 animate-pulse" title="Optimization Opportunity" />}
+                                            <span className="text-sm font-normal tracking-tight text-slate-900 lowercase first-letter:uppercase">{lead.companyName}</span>
+                                            {lead.industry?.toLowerCase().includes("tech") && <IconRocket className="size-3 text-slate-300" />}
+                                            {lead.country === "Vietnam" && <IconUsersGroup className="size-3 text-cyan-400" />}
                                         </div>
-                                        <span className="text-[10px] text-slate-400 font-normal tracking-tight truncate max-w-[150px]">{lead.whatsapp || lead.email}</span>
+                                        <span className="text-[10px] text-slate-400 font-normal tracking-tight lowercase">{lead.whatsapp || lead.email}</span>
                                     </div>
                                 </TableCell>
                                 <TableCell className="text-slate-500 font-normal py-4 text-xs">
@@ -179,17 +183,24 @@ export default function LeadsPage() {
                                     </div>
                                 </TableCell>
                                 <TableCell className="text-slate-500 font-normal py-4 text-xs">{lead.industry}</TableCell>
-                                <TableCell className="py-4">
-                                    <Badge variant="outline" className={`rounded-lg px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider ${lead.dctsStatus === 'LDC' ? 'bg-indigo-50 border-indigo-200 text-indigo-600' :
-                                        lead.dctsStatus === 'ENHANCED' ? 'bg-slate-100 border-slate-200 text-slate-800' :
-                                            'bg-slate-50 border-slate-200 text-slate-600'
-                                        }`}>
+                                <TableCell className="py-5">
+                                    <Badge className={cn(
+                                        "rounded-sm px-2 py-0.5 text-[10px] font-normal tracking-tighter shadow-none border-none",
+                                        lead.dctsStatus === 'LDC' ? 'bg-cyan-500 text-white' :
+                                            lead.dctsStatus === 'ENHANCED' ? 'bg-slate-600 text-white' :
+                                                'bg-slate-400 text-white'
+                                    )}>
                                         {lead.dctsStatus || "CHECKING"}
                                     </Badge>
                                 </TableCell>
-                                <TableCell className="py-4">
-                                    <Badge variant={getStatusColor(lead.status)} className="rounded-lg px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider">
-                                        {lead.status}
+                                <TableCell className="py-5">
+                                    <Badge className={cn(
+                                        "rounded-sm px-2 py-0.5 text-[10px] font-normal tracking-tighter shadow-none border-none",
+                                        lead.status === 'new' ? 'bg-amber-500 text-white' :
+                                            lead.status === 'won' ? 'bg-cyan-500 text-white' :
+                                                'bg-slate-400 text-white'
+                                    )}>
+                                        {lead.status.toUpperCase()}
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="text-right py-4 pr-8">
@@ -221,9 +232,9 @@ export default function LeadsPage() {
                     setIsEditing(false);
                 }
             }}>
-                <SheetContent className="overflow-y-auto sm:max-w-xl p-0 flex flex-col h-full border-l border-slate-100 shadow-2xl">
+                <SheetContent className="overflow-y-auto sm:max-w-xl p-0 h-full border-l border-slate-100 shadow-2xl">
                     {selectedLead && (
-                        <div className="flex flex-col h-full bg-slate-50/30">
+                        <div className="flex flex-col bg-slate-50/30 min-h-full">
                             {/* Header Section */}
                             <div className="p-8 bg-white border-b border-slate-100 space-y-6">
                                 <SheetHeader className="text-left space-y-4">
@@ -242,7 +253,7 @@ export default function LeadsPage() {
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-2">
-                                            {!isEditing && !isAnalyzing && (
+                                            {!isEditing && (
                                                 <Button variant="ghost" size="sm" onClick={() => setIsEditing(true)} className="h-9 px-3 rounded-lg hover:bg-slate-100">
                                                     <IconEdit className="mr-2 size-4" />
                                                     Edit
@@ -251,43 +262,19 @@ export default function LeadsPage() {
                                         </div>
                                     </div>
 
-                                    {/* Intelligence/Reasoning Layer */}
-                                    {isAnalyzing ? (
-                                        <div className="rounded-xl bg-slate-950 p-6 text-white border border-slate-800 shadow-2xl overflow-hidden relative group">
-                                            <div className="absolute top-0 right-0 p-4 opacity-10">
-                                                <IconRefresh className="size-12 animate-spin-slow text-slate-400" />
-                                            </div>
-                                            <h3 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-6 flex items-center gap-2">
-                                                <div className="h-1.5 w-1.5 rounded-full bg-slate-400 animate-pulse" />
-                                                Deep Reasoning Flow
-                                            </h3>
-                                            <ul className="space-y-4">
-                                                <li className="flex items-center gap-3 text-sm font-medium animate-in fade-in slide-in-from-left-2 duration-300">
-                                                    <IconCheck className="size-4 text-slate-400" /> Sourcing Company Profile...
-                                                </li>
-                                                <li className="flex items-center gap-3 text-sm font-medium animate-in fade-in slide-in-from-left-2 delay-700 duration-300">
-                                                    <IconRefresh className="size-4 text-slate-400 animate-spin" /> Analyzing Lane Frequency...
-                                                </li>
-                                                <li className="flex items-center gap-3 text-sm font-medium text-white/30">
-                                                    <IconCircle className="size-4" /> Finalizing Strategy Draft...
-                                                </li>
-                                            </ul>
+                                    <div className="bg-slate-50 rounded-xl border border-slate-100 p-5 group hover:bg-slate-100 transition-colors">
+                                        <div className="flex items-center justify-between mb-3">
+                                            <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 flex items-center gap-2">
+                                                <IconRocket className="size-3" /> Strategic Case
+                                            </h4>
+                                            <span className="text-[10px] font-bold text-slate-400">IQ CONFIRMED</span>
                                         </div>
-                                    ) : (
-                                        <div className="bg-slate-50 rounded-xl border border-slate-100 p-5 group hover:bg-slate-100 transition-colors">
-                                            <div className="flex items-center justify-between mb-3">
-                                                <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 flex items-center gap-2">
-                                                    <IconRocket className="size-3" /> Strategic Case
-                                                </h4>
-                                                <span className="text-[10px] font-bold text-slate-400">IQ CONFIRMED</span>
-                                            </div>
-                                            <p className="text-sm font-medium leading-relaxed text-slate-700">
-                                                {selectedLead.industry?.toLowerCase().includes("tech")
-                                                    ? `Identified Scaling Milestone: ${selectedLead.companyName} is expanding tech manufacturing operations in ${selectedLead.country}, creating a high-frequency lane opportunity for UK distribution.`
-                                                    : `Autonomous discovery flagged ${selectedLead.companyName} as a ${selectedLead.industry} leader. Strategy focuses on optimizing their ${selectedLead.country} -> UK trade lane for maximum efficiency.`}
-                                            </p>
-                                        </div>
-                                    )}
+                                        <p className="text-sm font-medium leading-relaxed text-slate-700">
+                                            {selectedLead.industry?.toLowerCase().includes("tech")
+                                                ? `Identified Scaling Milestone: ${selectedLead.companyName} is expanding tech manufacturing operations in ${selectedLead.country}, creating a high-frequency lane opportunity for UK distribution.`
+                                                : `Autonomous discovery flagged ${selectedLead.companyName} as a ${selectedLead.industry} leader. Strategy focuses on optimizing their ${selectedLead.country} -> UK trade lane for maximum efficiency.`}
+                                        </p>
+                                    </div>
 
                                     {/* Premium Metrics Grid */}
                                     <div className="grid grid-cols-2 gap-4 pt-2">
@@ -319,7 +306,7 @@ export default function LeadsPage() {
                                 </SheetHeader>
                             </div>
 
-                            <div className="p-8 space-y-8 flex-1 overflow-y-auto custom-scrollbar">
+                            <div className="p-8 space-y-8 flex-1">
                                 {!isEditing ? (
                                     <>
                                         {/* GeoRisk Navigator Integration */}
@@ -407,6 +394,7 @@ export default function LeadsPage() {
                                                 </TabsList>
 
                                                 <TabsContent value="email" className="mt-0">
+                                                    {/* ... (existing content) */}
                                                     <div className="bg-white border-2 border-dashed border-slate-100 rounded-3xl p-6 space-y-4">
                                                         <div className="space-y-2">
                                                             <p className="text-[10px] text-slate-400 font-bold italic uppercase">Subject: Partnering on {selectedLead.country} → UK lane</p>
@@ -435,8 +423,8 @@ export default function LeadsPage() {
 
                                                 <TabsContent value="whatsapp" className="mt-0">
                                                     <div className="bg-white border-2 border-dashed border-slate-100 rounded-3xl p-8 text-center space-y-3">
-                                                        <div className="p-3 bg-slate-50 rounded-full w-fit mx-auto">
-                                                            <IconBrandWhatsapp className="h-6 w-6 text-emerald-500/50" />
+                                                        <div className="p-1.5 bg-indigo-50 rounded-md group-hover:bg-indigo-100 transition-colors">
+                                                            <IconActivity className="size-3.5 text-indigo-600" />
                                                         </div>
                                                         <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Lookup Pending</p>
                                                     </div>
@@ -502,7 +490,7 @@ export default function LeadsPage() {
                                                 <Label htmlFor="country" className="text-[10px] font-black uppercase text-slate-400 tracking-widest px-1">Country/Region</Label>
                                                 <Input
                                                     id="country"
-                                                    className="bg-slate-50 border-none h-11 rounded-xl focus-visible:ring-2 focus-visible:ring-cyan-500/20 px-4"
+                                                    className="bg-slate-50 border-none h-11 rounded-xl focus-visible:ring-2 focus-visible:ring-slate-200/50 px-4"
                                                     value={editData.country}
                                                     onChange={(e) => setEditData({ ...editData, country: e.target.value })}
                                                 />
@@ -511,7 +499,7 @@ export default function LeadsPage() {
                                                 <Label htmlFor="industry" className="text-[10px] font-black uppercase text-slate-400 tracking-widest px-1">Industry</Label>
                                                 <Input
                                                     id="industry"
-                                                    className="bg-slate-50 border-none h-11 rounded-xl focus-visible:ring-2 focus-visible:ring-cyan-500/20 px-4"
+                                                    className="bg-slate-50 border-none h-11 rounded-xl focus-visible:ring-2 focus-visible:ring-slate-200/50 px-4"
                                                     value={editData.industry}
                                                     onChange={(e) => setEditData({ ...editData, industry: e.target.value })}
                                                 />
@@ -520,7 +508,7 @@ export default function LeadsPage() {
                                                 <Label htmlFor="whatsapp" className="text-[10px] font-black uppercase text-slate-400 tracking-widest px-1">WhatsApp</Label>
                                                 <Input
                                                     id="whatsapp"
-                                                    className="bg-slate-50 border-none h-11 rounded-xl focus-visible:ring-2 focus-visible:ring-cyan-500/20 px-4"
+                                                    className="bg-slate-50 border-none h-11 rounded-xl focus-visible:ring-2 focus-visible:ring-slate-200/50 px-4"
                                                     value={editData.whatsapp}
                                                     onChange={(e) => setEditData({ ...editData, whatsapp: e.target.value })}
                                                 />

@@ -46,16 +46,16 @@ export default function BillingPage() {
             {/* Usage Summary */}
             <Card className="border-primary/20 bg-primary/5">
                 <CardHeader>
-                    <CardTitle className="text-lg text-cyan-500">Propulsion Capacity</CardTitle>
+                    <CardTitle className="text-lg text-slate-900">Propulsion Capacity</CardTitle>
                     <CardDescription className="text-slate-400">Sync window reset in ~{24 - new Date().getHours()} hours</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="flex justify-between items-end">
                         <div className="flex flex-col gap-1">
-                            <span className="text-4xl font-black text-cyan-500">{planInfo.used} / {planInfo.quota}</span>
+                            <span className="text-4xl font-black text-slate-900">{planInfo.used} / {planInfo.quota}</span>
                             <span className="text-sm font-bold uppercase tracking-widest text-slate-500">Active Propulsions</span>
                         </div>
-                        <Badge variant="outline" className="mb-2 bg-cyan-500/10 border-cyan-500/20 text-cyan-500 uppercase tracking-widest text-[10px]">
+                        <Badge variant="outline" className="mb-2 bg-indigo-50 border-indigo-200 text-indigo-600 uppercase tracking-widest text-[10px] font-semibold px-2 py-0.5">
                             {planInfo.plan} Engine
                         </Badge>
                     </div>

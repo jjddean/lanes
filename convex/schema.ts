@@ -169,7 +169,8 @@ export default defineSchema({
       v.literal("intent_predicted"),
       v.literal("intent_corrected"),
       v.literal("deal_stage_changed"),
-      v.literal("dcts_eligibility_checked")
+      v.literal("dcts_eligibility_checked"),
+      v.literal("pref_utilization_alert")
     ),
     referenceId: v.string(), // ID of lead, message, or reply
     featureSnapshot: v.optional(v.string()), // Versioned immutable JSON (feature_snapshot_v1)
@@ -258,4 +259,33 @@ export default defineSchema({
     dctsRate: v.number(),
     rulesOfOrigin: v.string(),
   }).index("by_country", ["countryCode"]),
+
+  tradeStats: defineTable({
+    hsCode: v.string(),
+    countryCode: v.string(),
+    totalImportValue: v.number(),
+    prefImportValue: v.number(),
+    period: v.string(),
+    pur: v.number(),
+  }).index("byHsCountry", ["hsCode", "countryCode"]),
+
+  complianceDocs: defineTable({
+    orgId: v.id("organizations"),
+    leadId: v.id("leads"),
+    type: v.union(v.literal("EUR.1"), v.literal("GSP_FORM_A"), v.literal("ORIGIN_DECLARATION")),
+    status: v.union(v.literal("draft"), v.literal("generated"), v.literal("archived")),
+    formData: v.string(), // JSON string of all Box 1-12 fields
+    period: v.string(),
+    createdAt: v.number(),
+  }).index("byOrgId", ["orgId"]).index("byLeadId", ["leadId"]),
+
+  knowledgeChunks: defineTable({
+    documentId: v.string(),
+    text: v.string(),
+    embedding: v.array(v.float64()),
+    metadata: v.optional(v.any()),
+  }).vectorIndex("by_embedding", {
+    vectorField: "embedding",
+    dimensions: 1536, // Standard for OpenAI/modern models, adjustable based on provider
+  }),
 });

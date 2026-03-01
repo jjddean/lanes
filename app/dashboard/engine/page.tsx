@@ -168,7 +168,7 @@ export default function EngineConsolePage() {
     if (org === undefined) {
         return (
             <div className="flex items-center justify-center min-h-[60vh]">
-                <Activity className="h-8 w-8 text-blue-600 animate-pulse" />
+                <Activity className="h-8 w-8 text-slate-400 animate-pulse" />
             </div>
         );
     }
@@ -241,7 +241,7 @@ export default function EngineConsolePage() {
                             <div className="space-y-2">
                                 <Label>Company Context & Bio</Label>
                                 <textarea
-                                    className="w-full p-4 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all min-h-[120px] resize-none"
+                                    className="w-full p-4 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-slate-100 focus:border-slate-400 outline-none transition-all min-h-[120px] resize-none"
                                     placeholder="Briefly describe what your company does. This helps the AI personalize outreach context."
                                     value={senderProfile.companyBio}
                                     onChange={(e) => setSenderProfile(s => ({ ...s, companyBio: e.target.value }))}
@@ -251,7 +251,7 @@ export default function EngineConsolePage() {
                             <div className="space-y-2">
                                 <Label>Core Offer Summary</Label>
                                 <textarea
-                                    className="w-full p-4 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all min-h-[100px] resize-none"
+                                    className="w-full p-4 rounded-lg border border-slate-200 bg-white focus:ring-2 focus:ring-slate-100 focus:border-slate-400 outline-none transition-all min-h-[100px] resize-none"
                                     placeholder="What is the main value you are offering in the first message? (e.g., Free lane audit, direct rates to Vietnam, etc.)"
                                     value={senderProfile.offerSummary}
                                     onChange={(e) => setSenderProfile(s => ({ ...s, offerSummary: e.target.value }))}
@@ -272,7 +272,7 @@ export default function EngineConsolePage() {
                         <CardHeader className="border-b border-slate-50 bg-slate-50/30">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-2">
-                                    <div className="bg-blue-600 p-1.5 rounded-lg text-white">
+                                    <div className="bg-slate-900 p-1.5 rounded-lg text-white">
                                         <Target className="h-4 w-4" />
                                     </div>
                                     <div>

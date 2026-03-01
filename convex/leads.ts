@@ -22,6 +22,18 @@ export const listLeads = query({
     },
 });
 
+export const listLeadsByOrg = query({
+    args: {
+        orgId: v.id("organizations"),
+    },
+    handler: async (ctx, args) => {
+        return await ctx.db
+            .query("leads")
+            .withIndex("byOrgId", (q) => q.eq("orgId", args.orgId))
+            .collect();
+    },
+});
+
 export const createLead = mutation({
     args: {
         workflowId: v.optional(v.id("workflows")),

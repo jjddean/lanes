@@ -65,6 +65,11 @@ const data = {
       icon: IconFileDescription,
     },
     {
+      title: "Compliance",
+      url: "/dashboard/compliance",
+      icon: IconFileDescription,
+    },
+    {
       title: "Billing",
       url: "/dashboard/billing",
       icon: IconDatabase,
@@ -85,7 +90,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <Link href="/">
                 <ChatMaxingIconColoured className="!size-6" />
                 <span className="text-base font-semibold">LanesAI</span>
-                <Badge variant="outline" className="text-cyan-600 border-cyan-200 bg-cyan-50 text-xs uppercase tracking-tight">Active Engine</Badge>
+                <Badge variant="outline" className="text-indigo-600 border-indigo-200 bg-indigo-50 text-[9px] uppercase tracking-widest font-semibold px-2 py-0.5">Active Engine</Badge>
               </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>

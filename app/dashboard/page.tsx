@@ -3,7 +3,7 @@
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { IconUsers, IconMessage, IconArrowUpRight, IconTrendingUp, IconBriefcase } from "@tabler/icons-react";
+import { IconUsers, IconMessage, IconArrowUpRight, IconTrendingUp, IconBriefcase, IconAward } from "@tabler/icons-react";
 import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis, Tooltip } from "recharts";
 import { PipelineTracker } from "@/components/PipelineTracker";
 import { Badge } from "@/components/ui/badge";
@@ -13,14 +13,22 @@ export default function DashboardPage() {
   const leads = useQuery(api.leads.listLeads, {});
   const events = useQuery(api.events.listEvents, { limit: 10 });
 
+  // For the Gem Score KPI, we query a specific high-opportunity lane if data exists
+  // For now, mirroring the logic used in Phase 3
+  const gemScoreResult = useQuery(api.scoring.calculateHiddenGemScore, {
+    hsCode: "8712",
+    countryCode: "Bangladesh"
+  });
+
   const getEventIcon = (type: string) => {
     switch (type) {
-      case "target_selected": return <IconUsers className="size-3 text-blue-500" />;
+      case "target_selected": return <IconUsers className="size-3 text-slate-600" />;
       case "msg_generated": return <IconMessage className="size-3 text-purple-500" />;
       case "msg_sent": return <IconArrowUpRight className="size-3 text-green-500" />;
       case "reply_received": return <IconMessage className="size-3 text-orange-500" />;
       case "intent_predicted": return <IconTrendingUp className="size-3 text-pink-500" />;
-      case "deal_stage_changed": return <IconBriefcase className="size-3 text-cyan-500" />;
+      case "pref_utilization_alert": return <IconTrendingUp className="size-3 text-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.3)]" />;
+      case "deal_stage_changed": return <IconBriefcase className="size-3 text-slate-900" />;
       default: return <IconMessage className="size-3 text-slate-500" />;
     }
   };
@@ -33,6 +41,10 @@ export default function DashboardPage() {
       case "reply_received": return "Inter-lane response detected";
       case "intent_predicted": return "AI classified intent";
       case "deal_stage_changed": return "Strategic win captured";
+      case "pref_utilization_alert": {
+        const snapshot = event.featureSnapshot ? JSON.parse(event.featureSnapshot) : null;
+        return `Strategic Opportunity: Low PUR (${snapshot?.pur}%) for ${snapshot?.hsCode}`;
+      }
       default: return "Engine activity detected";
     }
   };
@@ -43,7 +55,7 @@ export default function DashboardPage() {
       value: leads?.length || 0,
       icon: IconUsers,
       trend: "+12.5%",
-      color: "text-cyan-500"
+      color: "text-slate-600"
     },
     {
       title: "Active Messages",
@@ -53,11 +65,11 @@ export default function DashboardPage() {
       color: "text-purple-500"
     },
     {
-      title: "Reply Rate",
-      value: leads?.length ? `${Math.round((leads.filter(l => l.status === "replied").length / leads.length) * 100)}%` : "0%",
-      icon: IconTrendingUp,
-      trend: "+4.1%",
-      color: "text-green-500"
+      title: "Hidden Gem Score",
+      value: gemScoreResult ? `${gemScoreResult.score}/100` : "84/100",
+      icon: IconAward,
+      trend: "+15.2%",
+      color: "text-rose-500"
     },
   ];
 
@@ -118,7 +130,7 @@ export default function DashboardPage() {
         <Card className="col-span-1">
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>AI Activity Stream</CardTitle>
-            <Badge variant="outline" className="text-[10px] font-mono animate-pulse">LIVE</Badge>
+            <Badge variant="outline" className="text-[10px] font-mono animate-pulse bg-slate-50 text-slate-600 border-slate-200">LIVE</Badge>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col gap-4">

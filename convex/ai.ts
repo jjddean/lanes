@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 import { internalAction, internalMutation, internalQuery, query } from "./_generated/server";
-import { internal } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 import * as ollama from "./providers/ollama";
 
 /**
@@ -20,14 +20,26 @@ export const generateAndCacheMessage = internalAction({
         const lead = await ctx.runQuery(internal.ai.getLeadForAi, { id: args.leadId });
         if (!lead) return;
 
-        // 1. Generate personalized message
+        // 1. RAG: Search for relevant legislation (Placeholder for embedding generation)
+        // In a production app, we would call an embedding API (e.g. OpenAI or local Ollama) here.
+        const mockEmbedding = new Array(1536).fill(0).map(() => Math.random());
+        const snippets = await ctx.runAction(api.knowledge.searchLegislation, {
+            query: `Development impact, poverty reduction, and employment in ${lead.industry} for ${lead.country}`,
+            embedding: mockEmbedding,
+            limit: 3,
+        });
+
+        const contextInfo = (snippets || []).map((s: any) => s.text).join("\n\n");
+
+        // 2. Generate personalized message with legal context
         const content = await ollama.generateOutboundMessage({
             leadName: lead.companyName,
             industry: lead.industry,
             lane: `${lead.laneOrigin} to ${lead.laneDestination}`,
+            customContext: contextInfo, // New field for RAG
         });
 
-        // 2. Cache result in messages table
+        // 3. Cache result in messages table
         await ctx.runMutation(internal.ai.updateMessageContent, {
             id: args.messageId,
             content,

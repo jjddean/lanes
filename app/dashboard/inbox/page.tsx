@@ -223,7 +223,7 @@ function InboxPageContent() {
                                     <IconSearch className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-500" />
                                     <Input
                                         placeholder="Search messages..."
-                                        className="pl-9 bg-white border-border text-xs h-10 rounded-lg focus-visible:ring-accent-cyan text-slate-900 placeholder:text-slate-500"
+                                        className="pl-9 bg-white border-border text-xs h-10 rounded-lg focus-visible:ring-slate-200 text-slate-900 placeholder:text-slate-500"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                     />
@@ -362,7 +362,7 @@ function InboxPageContent() {
                                                         <Button
                                                             variant="ghost"
                                                             size="sm"
-                                                            className="h-8 px-3 text-slate-500 hover:text-accent-cyan font-semibold text-xs transition-all flex items-center gap-1.5"
+                                                            className="h-8 px-3 text-slate-500 hover:text-indigo-600 font-semibold text-xs transition-all flex items-center gap-1.5"
                                                             onClick={() => { setIsReplying(true); setIsAiAssisting(true); }}
                                                         >
                                                             <IconSparkles className="size-4" /> AI Assistant
@@ -484,8 +484,8 @@ function InboxPageContent() {
                                                     </div>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem className="rounded-lg gap-3 py-2.5 px-3 focus:bg-slate-50 cursor-pointer group">
-                                                    <div className="p-1.5 bg-cyan-50 rounded-md group-hover:bg-cyan-100 transition-colors">
-                                                        <IconExternalLink className="size-3.5 text-cyan-600" />
+                                                    <div className="p-1.5 bg-slate-50 rounded-md group-hover:bg-slate-100 transition-colors">
+                                                        <IconExternalLink className="size-3.5 text-slate-600" />
                                                     </div>
                                                     <div className="flex flex-col gap-0.5">
                                                         <span className="text-xs font-semibold text-slate-700">View Lead DNA</span>
@@ -526,7 +526,7 @@ function InboxPageContent() {
 
                                         {isReplying && (
                                             <div className="animate-in slide-in-from-bottom-2 duration-300 mt-4">
-                                                <div className="flex flex-col border border-border rounded-lg bg-white shadow-sm focus-within:ring-2 focus-within:ring-accent-cyan/20 transition-all overflow-hidden">
+                                                <div className="flex flex-col border border-border rounded-lg bg-white shadow-sm focus-within:ring-2 focus-within:ring-slate-100 transition-all overflow-hidden">
                                                     {isAiAssisting && (
                                                         <div className="p-4 bg-muted border-b border-border flex items-center justify-between animate-in fade-in slide-in-from-top-1 duration-300">
                                                             <div className="flex items-center gap-3">
@@ -566,7 +566,7 @@ function InboxPageContent() {
                                                     <div className="flex justify-between items-center p-4 bg-muted/30 border-t border-border">
                                                         <div className="flex gap-1">
                                                             <Button variant="ghost" size="icon" className="size-9" onClick={() => { setIsReplying(false); setIsAiAssisting(false); }}><IconX className="size-4" /></Button>
-                                                            <Button variant="ghost" size="icon" className={cn("size-9", isAiAssisting ? "text-secondary bg-accent-cyan" : "text-muted-foreground")} onClick={() => setIsAiAssisting(!isAiAssisting)}><IconSparkles className="size-4" /></Button>
+                                                            <Button variant="ghost" size="icon" className={cn("size-9", isAiAssisting ? "text-indigo-600 bg-indigo-50" : "text-muted-foreground")} onClick={() => setIsAiAssisting(!isAiAssisting)}><IconSparkles className="size-4" /></Button>
                                                         </div>
                                                         <Button
                                                             disabled={isSending}
@@ -664,7 +664,7 @@ function InboxPageContent() {
                                             placeholder={composeChannel === "email" ? "Lead Email (Required)" : "Phone Number (e.g. +123...)"}
                                             value={composeRecipient}
                                             onChange={(e) => setComposeRecipient(e.target.value)}
-                                            className="bg-white border-slate-200 h-12 text-sm focus:ring-2 focus:ring-accent-cyan/20 focus:border-accent-cyan transition-all rounded-xl pl-4 text-slate-900 placeholder:text-slate-500"
+                                            className="bg-white border-slate-200 h-12 text-sm focus:ring-2 focus:ring-slate-100 focus:border-slate-400 transition-all rounded-xl pl-4 text-slate-900 placeholder:text-slate-500"
                                         />
                                     </div>
                                 </div>
@@ -675,13 +675,13 @@ function InboxPageContent() {
                                         placeholder="Type your message here..."
                                         value={composeContent}
                                         onChange={(e) => setComposeContent(e.target.value)}
-                                        className="w-full min-h-[200px] bg-white rounded-xl border border-slate-200 p-5 text-sm focus:outline-none focus:ring-2 focus:ring-accent-cyan/20 focus:border-accent-cyan transition-all resize-none leading-relaxed text-slate-900 placeholder:text-slate-500 shadow-sm font-medium"
+                                        className="w-full min-h-[200px] bg-white rounded-xl border border-slate-200 p-5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-100 focus:border-slate-400 transition-all resize-none leading-relaxed text-slate-900 placeholder:text-slate-500 shadow-sm font-medium"
                                     />
                                 </div>
 
                                 <div className="p-6 rounded-2xl bg-muted/30 border border-slate-100 space-y-4">
                                     <div className="flex items-center gap-3">
-                                        <div className="size-8 rounded-lg bg-accent-cyan flex items-center justify-center text-slate-900">
+                                        <div className="size-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600">
                                             <IconSparkles className="size-4" />
                                         </div>
                                         <span className="text-xs font-bold text-slate-900">AI Optimization Active</span>

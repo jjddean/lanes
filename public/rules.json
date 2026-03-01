@@ -1,0 +1,24 @@
+{
+    "rules": [
+        {
+            "hs": "8712",
+            "r": "Change in Tariff Heading (CTH) or Value-Added threshold of 60%",
+            "d": "Bicycles and other cycles"
+        },
+        {
+            "hs": "61",
+            "r": "Manufacture from yarn; 'double transformation' required.",
+            "d": "Articles of apparel and clothing accessories"
+        },
+        {
+            "hs": "0901",
+            "r": "Wholly obtained; all materials must be produced locally.",
+            "d": "Coffee"
+        },
+        {
+            "hs": "8517",
+            "r": "Value-Added threshold of 50%; non-originating parts capped.",
+            "d": "Smartphones and communication equipment"
+        }
+    ]
+}
