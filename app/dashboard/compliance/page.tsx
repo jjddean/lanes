@@ -246,7 +246,7 @@ export default function CompliancePage() {
                                                 <><IconAlertCircle className="size-3" /> Fail</>
                                             )}
                                         </span>
-                                        <span className="text-[10px] font-mono text-slate-900">{simulationResult.localContent.toFixed(1)}% VA</span>
+                                        <span className="text-[10px] font-mono text-slate-900">{simulationResult.localContent?.toFixed(1) || "0.0"}% VA</span>
                                     </div>
                                     <p className="text-[11px] font-medium text-slate-600 leading-tight">
                                         {simulationResult.advisory}

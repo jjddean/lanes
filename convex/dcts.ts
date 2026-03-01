@@ -87,7 +87,13 @@ export const simulateRulesOfOrigin = query({
     handler: async (ctx, args) => {
         const lead = await ctx.db.get(args.leadId);
         if (!lead || !lead.hsCode) {
-            return { passes: false, advisory: "HS Code missing. Cannot determine specific RoO rule." };
+            return {
+                passes: false,
+                advisory: "HS Code missing. Cannot determine specific RoO rule.",
+                localContent: 0,
+                required: 0,
+                appliedRule: "NONE"
+            };
         }
 
         // 1. Find the best matching rule (longest prefix)
