@@ -55,21 +55,15 @@ export async function generateOutboundMessage({
     leadName,
     industry,
     lane,
-    customContext,
     testMode = false,
 }: {
     leadName: string;
     industry: string;
     lane: string;
-    customContext?: string;
     testMode?: boolean;
 }) {
-    const system = "You are a professional freight outbound sales assistant. Write short, personalized, and high-converting messages. Use the provided context if available to add authority.";
-    let prompt = `Write a short WhatsApp intro for ${leadName} in the ${industry} industry. They focus on the ${lane} trade lane. Be concise and professional.`;
-
-    if (customContext) {
-        prompt += `\n\nUse this relevant trade context to personalize the message: ${customContext}`;
-    }
+    const system = "You are a professional freight outbound sales assistant. Write short, personalized, and high-converting messages.";
+    const prompt = `Write a short WhatsApp intro for ${leadName} in the ${industry} industry. They focus on the ${lane} trade lane. Be concise and professional.`;
 
     return await generateCompletion({ prompt, system, testMode });
 }

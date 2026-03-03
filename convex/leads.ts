@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { internalMutation, mutation, query } from "./_generated/server";
 import { getCurrentUser } from "./users";
+import { paginationOptsValidator } from "convex/server";
 
 export const listLeads = query({
     args: {
@@ -22,15 +23,71 @@ export const listLeads = query({
     },
 });
 
+export const listLeadsPaginated = query({
+    args: {
+        status: v.optional(v.string()),
+        paginationOpts: paginationOptsValidator,
+    },
+    handler: async (ctx, args) => {
+        const user = await getCurrentUser(ctx);
+        if (!user || !user.orgId) {
+            return {
+                page: [],
+                isDone: true,
+                continueCursor: "",
+                splitCursor: null,
+                pageStatus: null,
+            };
+        }
+
+        if (args.status) {
+            return await ctx.db
+                .query("leads")
+                .withIndex("byStatusCreatedAt", (q) =>
+                    q.eq("orgId", user.orgId!).eq("status", args.status as any)
+                )
+                .order("desc")
+                .paginate(args.paginationOpts);
+        }
+
+        return await ctx.db
+            .query("leads")
+            .withIndex("byOrgCreatedAt", (q) => q.eq("orgId", user.orgId!))
+            .order("desc")
+            .paginate(args.paginationOpts);
+    },
+});
+
 export const listLeadsByOrg = query({
     args: {
         orgId: v.id("organizations"),
     },
     handler: async (ctx, args) => {
+        const user = await getCurrentUser(ctx);
+        if (!user || !user.orgId) return [];
+        if (user.orgId !== args.orgId) return [];
+
         return await ctx.db
             .query("leads")
             .withIndex("byOrgId", (q) => q.eq("orgId", args.orgId))
             .collect();
+    },
+});
+
+export const listIndustryOptions = query({
+    args: {},
+    handler: async (ctx) => {
+        const user = await getCurrentUser(ctx);
+        if (!user || !user.orgId) return [];
+
+        const leads = await ctx.db
+            .query("leads")
+            .withIndex("byOrgId", (q) => q.eq("orgId", user.orgId!))
+            .collect();
+
+        return Array.from(new Set(leads.map((lead) => lead.industry).filter(Boolean))).sort((a, b) =>
+            a.localeCompare(b)
+        );
     },
 });
 

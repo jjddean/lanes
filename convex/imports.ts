@@ -58,7 +58,7 @@ export const processImportChunk = internalAction({
             return;
         }
 
-        const targetsToInsert = rows.map((row: any) => {
+        const targetsToInsert = rows.map(row => {
             const data = JSON.parse(row.data);
             return {
                 externalId: data.externalId || `import_${row._id}`,
@@ -74,7 +74,7 @@ export const processImportChunk = internalAction({
 
         await ctx.runMutation(internal.targets.seedTargets, { targets: targetsToInsert });
 
-        const rowIds = rows.map((r: any) => r._id);
+        const rowIds = rows.map(r => r._id);
         await ctx.runMutation(internal.imports.markRowsProcessed, { jobId: args.jobId, rowIds });
 
         // Continue processing

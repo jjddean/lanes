@@ -27,10 +27,10 @@ export default function HeroSection() {
                                         <div className="absolute inset-x-1.5 inset-y-0 border-x border-dotted border-white/25"></div>
                                         <Sparkle className="size-3 fill-background stroke-background drop-shadow" />
                                     </div>
-                                    <span className="font-medium">AI Trade Intelligence</span>
+                                    <span className="font-medium">Introducing AI Agents</span>
                                 </Link>
-                                <h1 className="mx-auto mt-8 max-w-3xl text-balance text-4xl font-bold tracking-tight sm:text-5xl">Automate Your Global Trade Strategy</h1>
-                                <p className="text-muted-foreground mx-auto my-6 max-w-xl text-balance text-xl">AI-powered lead discovery and automated outreach for freight, export, and international trade companies.</p>
+                                <h1 className="mx-auto mt-8 max-w-3xl text-balance text-4xl font-bold tracking-tight sm:text-5xl">Build 10x Faster with Starter</h1>
+                                <p className="text-muted-foreground mx-auto my-6 max-w-xl text-balance text-xl">Craft. Build. Ship Modern Websites With AI Support.</p>
 
                                 <div className="flex items-center justify-center gap-3">
                                     <SignedIn>

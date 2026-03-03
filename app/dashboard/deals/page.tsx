@@ -87,7 +87,7 @@ export default function DealsPage() {
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium">Total Pipeline Value</CardTitle>
-                        <IconBriefcase className="h-4 w-4 text-slate-400" />
+                        <IconBriefcase className="h-4 w-4 text-cyan-500" />
                     </CardHeader>
                     <CardContent>
                         <div className="text-2xl font-bold">$185,700</div>

@@ -8,29 +8,35 @@ export default function FAQs() {
                             Frequently <br className="hidden lg:block" /> Asked <br className="hidden lg:block" />
                             Questions
                         </h2>
-                        <p>Get answers about how Starter.diy transforms your trade operations.</p>
+                        <p>Accusantium quisquam. Illo, omnis?</p>
                     </div>
 
                     <div className="divide-y divide-dashed sm:mx-auto sm:max-w-lg lg:mx-0">
                         <div className="pb-6">
-                            <h3 className="font-medium">How does the AI identify profitable trade opportunities?</h3>
-                            <p className="text-muted-foreground mt-4">Our platform analyzes HS codes, trade lanes, tariff structures, and buyer profiles to identify high-opportunity markets. It scores potential deals based on tariff savings, market demand, and buyer capacity.</p>
+                            <h3 className="font-medium">What is the refund policy?</h3>
+                            <p className="text-muted-foreground mt-4">We offer a 30-day money back guarantee. If you are not satisfied with our product, you can request a refund within 30 days of your purchase.</p>
+
+                            <ol className="list-outside list-decimal space-y-2 pl-4">
+                                <li className="text-muted-foreground mt-4">To request a refund, please contact our support team with your order number and reason for the refund.</li>
+                                <li className="text-muted-foreground mt-4">Refunds will be processed within 3-5 business days.</li>
+                                <li className="text-muted-foreground mt-4">Please note that refunds are only available for new customers and are limited to one per customer.</li>
+                            </ol>
                         </div>
                         <div className="py-6">
-                            <h3 className="font-medium">Which messaging channels are supported?</h3>
-                            <p className="text-muted-foreground mt-4">WhatsApp, Email, and SMS. All messages are personalized with AI and respect local regulations. We handle warm-up protocols automatically to protect deliverability.</p>
+                            <h3 className="font-medium">How do I cancel my subscription?</h3>
+                            <p className="text-muted-foreground mt-4">You can cancel your subscription at any time by logging into your account and clicking on the cancel button.</p>
                         </div>
                         <div className="py-6">
-                            <h3 className="font-medium">How are leads qualified?</h3>
-                            <p className="text-muted-foreground my-4">The system analyzes incoming replies with AI intent detection (interested, question, objection, stop). Leads are automatically advanced through your pipeline based on engagement signals.</p>
+                            <h3 className="font-medium">Can I upgrade my plan?</h3>
+                            <p className="text-muted-foreground my-4">Yes, you can upgrade your plan at any time by logging into your account and selecting the plan you want to upgrade to.</p>
                             <ul className="list-outside list-disc space-y-2 pl-4">
-                                <li className="text-muted-foreground">Respects STOP commands immediately</li>
-                                <li className="text-muted-foreground">Auto-flags high-intent replies for your team</li>
+                                <li className="text-muted-foreground">You will be charged the difference in price between your current plan and the plan you are upgrading to.</li>
+                                <li className="text-muted-foreground">Your new plan will take effect immediately and you will be billed at the new rate on your next billing cycle.</li>
                             </ul>
                         </div>
                         <div className="py-6">
-                            <h3 className="font-medium">Can I target specific trade lanes?</h3>
-                            <p className="text-muted-foreground mt-4">Yes. You can filter by origin country, destination, HS codes, industry, and buyer type. Campaigns can be geoaligned with your supply chain priorities.</p>
+                            <h3 className="font-medium">Do you offer phone support?</h3>
+                            <p className="text-muted-foreground mt-4">We do not offer phone support at this time. However, you can contact us via email or live chat for any questions or concerns you may have.</p>
                         </div>
                     </div>
                 </div>

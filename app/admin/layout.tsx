@@ -12,15 +12,20 @@ export default async function AdminLayout({
 }: {
     children: React.ReactNode
 }) {
-    const { userId, sessionClaims } = await auth()
+    const { userId, has } = await auth()
+    const isOrgAdmin = Boolean(has?.({ role: "org:admin" }))
+    const allowInDev = process.env.NODE_ENV !== "production"
 
     // Initial gate: Must be logged in
     if (!userId) {
         redirect("/sign-in")
     }
 
-    // To implement role-based gating, you would check sessionClaims?.metadata?.role === 'admin'
-    // For now, we'll allow access to and let clerkMiddleware handle base protection.
+    // Defense-in-depth: keep an explicit server-side role gate in the layout as well.
+    // In local development, allow access even without org role to avoid lockout.
+    if (!isOrgAdmin && !allowInDev) {
+        redirect("/dashboard")
+    }
 
     return (
         <SidebarProvider

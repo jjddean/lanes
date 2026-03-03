@@ -68,6 +68,7 @@ export default defineSchema({
     orgId: v.id("organizations"),
     workflowId: v.optional(v.id("workflows")),
     companyName: v.string(),
+    companyType: v.optional(v.union(v.literal("importer"), v.literal("exporter"))),
     country: v.string(),
     industry: v.string(),
     hsCode: v.optional(v.string()),
@@ -92,12 +93,18 @@ export default defineSchema({
     snoozedUntil: v.optional(v.number()),
     assignedTo: v.optional(v.id("users")),
     enrichmentJson: v.optional(v.string()),
+    lastSeen: v.optional(v.number()),
     createdAt: v.number(),
     externalId: v.optional(v.string()),
   })
     .index("byOrgId", ["orgId"])
+    .index("byOrgCreatedAt", ["orgId", "createdAt"])
+    .index("byOrgCountry", ["orgId", "country"])
+    .index("byOrgIndustry", ["orgId", "industry"])
+    .index("byOrgCountryIndustry", ["orgId", "country", "industry"])
     .index("byWorkflowId", ["workflowId"])
     .index("byStatus", ["orgId", "status"])
+    .index("byStatusCreatedAt", ["orgId", "status", "createdAt"])
     .index("byExternalId", ["workflowId", "externalId"]),
 
   messages: defineTable({
@@ -258,7 +265,43 @@ export default defineSchema({
     mfnRate: v.number(),
     dctsRate: v.number(),
     rulesOfOrigin: v.string(),
-  }).index("by_country", ["countryCode"]),
+    isoCode: v.optional(v.string()),
+    countryNameNormalized: v.optional(v.string()),
+    cumulationGroups: v.optional(v.array(v.string())),
+    hasGraduationSuspensions: v.optional(v.boolean()),
+    graduationSuspensions: v.optional(v.array(v.object({
+      startDate: v.string(),
+      endDate: v.string(),
+      productCategories: v.array(v.string()),
+      reason: v.optional(v.string()),
+    }))),
+    hasUkFta: v.optional(v.boolean()),
+    isDctsBeneficiary: v.optional(v.boolean()),
+    notes: v.optional(v.string()),
+  })
+    .index("by_country", ["countryCode"])
+    .index("by_country_name", ["countryNameNormalized"])
+    .index("by_tier", ["tier"]),
+
+  complianceDocs: defineTable({
+    orgId: v.id("organizations"),
+    leadId: v.id("leads"),
+    type: v.union(
+      v.literal("EUR.1"),
+      v.literal("GSP_FORM_A"),
+      v.literal("FORM_A"),
+      v.literal("ORIGIN_DECLARATION"),
+      v.literal("SUPPLIER_DECLARATION"),
+      v.literal("PRODUCTION_RECORD"),
+      v.literal("CUMULATION_EVIDENCE")
+    ),
+    status: v.union(v.literal("draft"), v.literal("generated"), v.literal("archived")),
+    formData: v.string(),
+    period: v.string(),
+    createdAt: v.number(),
+  })
+    .index("byLeadId", ["leadId"])
+    .index("byOrgId", ["orgId"]),
 
   tradeStats: defineTable({
     hsCode: v.string(),
@@ -269,16 +312,6 @@ export default defineSchema({
     pur: v.number(),
   }).index("byHsCountry", ["hsCode", "countryCode"]),
 
-  complianceDocs: defineTable({
-    orgId: v.id("organizations"),
-    leadId: v.id("leads"),
-    type: v.union(v.literal("EUR.1"), v.literal("GSP_FORM_A"), v.literal("ORIGIN_DECLARATION")),
-    status: v.union(v.literal("draft"), v.literal("generated"), v.literal("archived")),
-    formData: v.string(), // JSON string of all Box 1-12 fields
-    period: v.string(),
-    createdAt: v.number(),
-  }).index("byOrgId", ["orgId"]).index("byLeadId", ["leadId"]),
-
   knowledgeChunks: defineTable({
     documentId: v.string(),
     text: v.string(),
@@ -286,6 +319,7 @@ export default defineSchema({
     metadata: v.optional(v.any()),
   }).vectorIndex("by_embedding", {
     vectorField: "embedding",
-    dimensions: 1536, // Standard for OpenAI/modern models, adjustable based on provider
+    dimensions: 1536,
+    filterFields: ["documentId"],
   }),
 });

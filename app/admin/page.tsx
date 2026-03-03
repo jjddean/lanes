@@ -16,6 +16,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
+import { HmrcConnectionCard } from "@/components/hmrc/HmrcConnectionCard";
 import { toast } from "sonner";
 import {
     Table,
@@ -155,6 +156,7 @@ export default function AdminPage() {
                         <p className="text-xs text-muted-foreground mt-1">Identity-level safety cap</p>
                     </CardContent>
                 </Card>
+                <HmrcConnectionCard returnTo="/admin" className="border-none shadow-sm shadow-slate-200 bg-white" />
             </div>
 
             <div className="grid gap-6 md:grid-cols-7">

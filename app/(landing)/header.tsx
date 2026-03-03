@@ -16,10 +16,10 @@ import { useTheme } from "next-themes"
 
 
 const menuItems = [
-    { name: 'Features', href: '/#link' },
-    { name: 'Solutions', href: '/solutions' },
-    { name: 'Pricing', href: '/#link' },
-    { name: 'About', href: '/about' },
+    { name: 'Features', href: '#link' },
+    { name: 'Solution', href: '#link' },
+    { name: 'Pricing', href: '#link' },
+    { name: 'About', href: '#link' },
 ]
 
 export const HeroHeader = () => {

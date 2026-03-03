@@ -43,7 +43,7 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Label } from "@/components/ui/label";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 /**
  * Constants for Precision DNA selections
@@ -91,6 +91,8 @@ const PERSONAS = [
 export default function EngineConsolePage() {
     const org = useQuery(api.users.getMyOrgSettings);
     const workflows = useQuery(api.workflows.listActiveWorkflows);
+    const dctsCountryOptions = useQuery(api.dcts.listCountryOptions);
+    const leadIndustryOptions = useQuery(api.leads.listIndustryOptions);
 
     const updateSettings = useMutation(api.users.updateSettings);
     const updateSenderProfile = useMutation(api.organizations.updateSenderProfile);
@@ -112,6 +114,17 @@ export default function EngineConsolePage() {
         buyerType: "",
         dailyLimit: 200,
     });
+
+    const tradeLaneOptions = useMemo(() => {
+        const catalogCountries = (dctsCountryOptions ?? []).map((c) => c.countryName);
+        return Array.from(new Set([...catalogCountries, ...REGIONS])).sort((a, b) => a.localeCompare(b));
+    }, [dctsCountryOptions]);
+
+    const industryOptions = useMemo(() => {
+        return Array.from(new Set([...(leadIndustryOptions ?? []), ...INDUSTRIES])).sort((a, b) =>
+            a.localeCompare(b)
+        );
+    }, [leadIndustryOptions]);
 
     useEffect(() => {
         if (org?.senderProfile) {
@@ -272,7 +285,7 @@ export default function EngineConsolePage() {
                         <CardHeader className="border-b border-slate-50 bg-slate-50/30">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-2">
-                                    <div className="bg-slate-900 p-1.5 rounded-lg text-white">
+                                    <div className="bg-blue-600 p-1.5 rounded-lg text-white">
                                         <Target className="h-4 w-4" />
                                     </div>
                                     <div>
@@ -300,13 +313,13 @@ export default function EngineConsolePage() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
                                         <div className="space-y-2">
                                             <Label className="text-xs font-bold text-slate-500 uppercase flex items-center gap-2">
-                                                <Globe className="h-3 w-3" /> Target Region / Trade Lane
+                                                <Globe className="h-3 w-3" /> Country Filter / Trade Lane
                                             </Label>
                                             <Select value={dna.tradeLane} onValueChange={v => setDna(d => ({ ...d, tradeLane: v }))}>
-                                                <SelectTrigger className="w-full bg-slate-50/30 h-11 border-slate-200"><SelectValue placeholder="Select Region..." /></SelectTrigger>
-                                                <SelectContent>{REGIONS.map(r => <SelectItem key={r} value={r}>{r}</SelectItem>)}</SelectContent>
+                                                <SelectTrigger className="w-full bg-slate-50/30 h-11 border-slate-200"><SelectValue placeholder="Select country..." /></SelectTrigger>
+                                                <SelectContent>{tradeLaneOptions.map(r => <SelectItem key={r} value={r}>{r}</SelectItem>)}</SelectContent>
                                             </Select>
-                                            <p className="text-[10px] text-muted-foreground italic">Geographic filter for the discovery engine.</p>
+                                            <p className="text-[10px] text-muted-foreground italic">Geographic filter for discovery (DCTS catalog + existing lane options).</p>
                                         </div>
 
                                         <div className="space-y-2">
@@ -315,7 +328,7 @@ export default function EngineConsolePage() {
                                             </Label>
                                             <Select value={dna.industry} onValueChange={v => setDna(d => ({ ...d, industry: v }))}>
                                                 <SelectTrigger className="w-full bg-slate-50/30 h-11 border-slate-200"><SelectValue placeholder="Select Industry..." /></SelectTrigger>
-                                                <SelectContent>{INDUSTRIES.map(i => <SelectItem key={i} value={i}>{i}</SelectItem>)}</SelectContent>
+                                                <SelectContent>{industryOptions.map(i => <SelectItem key={i} value={i}>{i}</SelectItem>)}</SelectContent>
                                             </Select>
                                             <p className="text-[10px] text-muted-foreground italic">AI uses this to customize payload tone.</p>
                                         </div>
