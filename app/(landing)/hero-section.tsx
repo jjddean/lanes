@@ -27,7 +27,7 @@ export default function HeroSection() {
                                         <div className="absolute inset-x-1.5 inset-y-0 border-x border-dotted border-white/25"></div>
                                         <Sparkle className="size-3 fill-background stroke-background drop-shadow" />
                                     </div>
-                                    <span className="font-medium">UK DCTS Trade Platform</span>
+                                    <span className="font-medium">UK DCTS Trade Development Platform</span>
                                 </Link>
                                 <h1 className="mx-auto mt-8 max-w-3xl text-balance text-4xl font-bold tracking-tight sm:text-5xl">Turn UK trade policy into your pipeline.</h1>
                                 <p className="text-muted-foreground mx-auto my-6 max-w-3xl text-balance text-xl">Elite is the first trade development platform built for the UK&apos;s Developing Countries Trading Scheme (DCTS). We help freight forwarders and DCTS-eligible exporters discover high-value trade opportunities, verify compliance, and connect with the right partners automatically.</p>
