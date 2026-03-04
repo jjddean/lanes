@@ -1,6 +1,6 @@
 export default function FAQs() {
     return (
-        <section className="scroll-py-16 py-16 md:scroll-py-32 md:py-32">
+        <section id="faq" className="scroll-py-16 py-16 md:scroll-py-32 md:py-32">
             <div className="mx-auto max-w-5xl px-6">
                 <div className="grid gap-y-12 px-2 lg:[grid-template-columns:1fr_auto]">
                     <div className="text-center lg:text-left">
@@ -8,35 +8,35 @@ export default function FAQs() {
                             Frequently <br className="hidden lg:block" /> Asked <br className="hidden lg:block" />
                             Questions
                         </h2>
-                        <p>Accusantium quisquam. Illo, omnis?</p>
+                        <p>Answers about DCTS workflows, onboarding, and compliance checks.</p>
                     </div>
 
                     <div className="divide-y divide-dashed sm:mx-auto sm:max-w-lg lg:mx-0">
                         <div className="pb-6">
-                            <h3 className="font-medium">What is the refund policy?</h3>
-                            <p className="text-muted-foreground mt-4">We offer a 30-day money back guarantee. If you are not satisfied with our product, you can request a refund within 30 days of your purchase.</p>
+                            <h3 className="font-medium">What does the free trial include?</h3>
+                            <p className="text-muted-foreground mt-4">You can set Trade DNA, run lead discovery, and test free-tier compliance checks before upgrading.</p>
 
                             <ol className="list-outside list-decimal space-y-2 pl-4">
-                                <li className="text-muted-foreground mt-4">To request a refund, please contact our support team with your order number and reason for the refund.</li>
-                                <li className="text-muted-foreground mt-4">Refunds will be processed within 3-5 business days.</li>
-                                <li className="text-muted-foreground mt-4">Please note that refunds are only available for new customers and are limited to one per customer.</li>
+                                <li className="text-muted-foreground mt-4">Configure target countries, industries, and buyer persona.</li>
+                                <li className="text-muted-foreground mt-4">Connect HMRC for customs-backed discovery.</li>
+                                <li className="text-muted-foreground mt-4">Run checks and launch outreach from one workspace.</li>
                             </ol>
                         </div>
                         <div className="py-6">
-                            <h3 className="font-medium">How do I cancel my subscription?</h3>
-                            <p className="text-muted-foreground mt-4">You can cancel your subscription at any time by logging into your account and clicking on the cancel button.</p>
+                            <h3 className="font-medium">Do you provide legal or customs advice?</h3>
+                            <p className="text-muted-foreground mt-4">No. Elite is a trade development platform. Users should verify compliance with applicable regulations.</p>
                         </div>
                         <div className="py-6">
-                            <h3 className="font-medium">Can I upgrade my plan?</h3>
-                            <p className="text-muted-foreground my-4">Yes, you can upgrade your plan at any time by logging into your account and selecting the plan you want to upgrade to.</p>
+                            <h3 className="font-medium">Can we upgrade plans later?</h3>
+                            <p className="text-muted-foreground my-4">Yes. Upgrade when you need deeper eligibility outputs, origin simulation detail, and higher usage limits.</p>
                             <ul className="list-outside list-disc space-y-2 pl-4">
-                                <li className="text-muted-foreground">You will be charged the difference in price between your current plan and the plan you are upgrading to.</li>
-                                <li className="text-muted-foreground">Your new plan will take effect immediately and you will be billed at the new rate on your next billing cycle.</li>
+                                <li className="text-muted-foreground">Upgrade unlocks additional compliance and automation depth.</li>
+                                <li className="text-muted-foreground">Changes apply immediately to your workspace.</li>
                             </ul>
                         </div>
                         <div className="py-6">
-                            <h3 className="font-medium">Do you offer phone support?</h3>
-                            <p className="text-muted-foreground mt-4">We do not offer phone support at this time. However, you can contact us via email or live chat for any questions or concerns you may have.</p>
+                            <h3 className="font-medium">Who is this platform built for?</h3>
+                            <p className="text-muted-foreground mt-4">Elite is built for UK freight forwarders, importers, and DCTS-eligible exporters looking to grow compliant trade lanes.</p>
                         </div>
                     </div>
                 </div>

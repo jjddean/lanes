@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { HeroHeader } from "./header"
 import { Sparkle } from 'lucide-react'
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignUpButton } from "@clerk/nextjs";
 
 export default function HeroSection() {
     return (
@@ -27,33 +27,33 @@ export default function HeroSection() {
                                         <div className="absolute inset-x-1.5 inset-y-0 border-x border-dotted border-white/25"></div>
                                         <Sparkle className="size-3 fill-background stroke-background drop-shadow" />
                                     </div>
-                                    <span className="font-medium">Introducing AI Agents</span>
+                                    <span className="font-medium">UK DCTS Trade Platform</span>
                                 </Link>
-                                <h1 className="mx-auto mt-8 max-w-3xl text-balance text-4xl font-bold tracking-tight sm:text-5xl">Build 10x Faster with Starter</h1>
-                                <p className="text-muted-foreground mx-auto my-6 max-w-xl text-balance text-xl">Craft. Build. Ship Modern Websites With AI Support.</p>
+                                <h1 className="mx-auto mt-8 max-w-3xl text-balance text-4xl font-bold tracking-tight sm:text-5xl">Turn UK trade policy into your pipeline.</h1>
+                                <p className="text-muted-foreground mx-auto my-6 max-w-3xl text-balance text-xl">Elite is the first trade development platform built for the UK&apos;s Developing Countries Trading Scheme (DCTS). We help freight forwarders and DCTS-eligible exporters discover high-value trade opportunities, verify compliance, and connect with the right partners automatically.</p>
 
                                 <div className="flex items-center justify-center gap-3">
                                     <SignedIn>
                                         <Button asChild size="lg">
                                             <Link href="/dashboard">
-                                                <span className="text-nowrap">Go to Dashboard</span>
+                                                <span className="text-nowrap">Open Dashboard</span>
                                             </Link>
                                         </Button>
                                     </SignedIn>
                                     <SignedOut>
-                                        <SignInButton mode="modal">
+                                        <SignUpButton mode="modal">
                                             <Button size="lg">
-                                                <span className="text-nowrap">Start Building</span>
+                                                <span className="text-nowrap">Start Free Trial</span>
                                             </Button>
-                                        </SignInButton>
+                                        </SignUpButton>
                                     </SignedOut>
 
                                     <Button
                                         asChild
                                         size="lg"
                                         variant="outline">
-                                        <Link href="https://youtube.com" target="_blank">
-                                            <span className="text-nowrap">Watch Video</span>
+                                        <Link href="#how-it-works">
+                                            <span className="text-nowrap">See How It Works</span>
                                         </Link>
                                     </Button>
                                 </div>

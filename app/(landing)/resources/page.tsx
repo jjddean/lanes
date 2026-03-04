@@ -51,7 +51,7 @@ export default function ResourcesPage() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground text-sm">
-                    Integrate Starter.diy with your existing CRM, ERP, or freight management system via REST API.
+                    Integrate Elite with your existing CRM, ERP, or freight management system via REST API.
                   </p>
                   <Button variant="outline" asChild>
                     <Link href="/">View Docs</Link>

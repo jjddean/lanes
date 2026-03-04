@@ -10,22 +10,22 @@ type Testimonial = {
 
 const testimonials: Testimonial[] = [
     {
-        name: 'Jonathan Yombo',
-        role: 'Software Engineer',
+        name: 'Head of Procurement',
+        role: 'UK Importer',
         image: 'https://randomuser.me/api/portraits/men/1.jpg',
-        quote: 'Tailus is really extraordinary and very practical, no need to break your head. A real gold mine.',
+        quote: 'We moved from manual supplier hunting to a repeatable lane pipeline in under a week.',
     },
     {
-        name: 'Yves Kalume',
-        role: 'GDE - Android',
+        name: 'Commercial Director',
+        role: 'Freight Forwarder',
         image: 'https://randomuser.me/api/portraits/men/6.jpg',
-        quote: 'With no experience in webdesign I just redesigned my entire website in a few minutes with tailwindcss thanks to Tailus.',
+        quote: 'The outreach engine helped us prioritize higher-intent trade lanes and improve response rates.',
     },
     {
-        name: 'Yucel Faruksahan',
-        role: 'Tailkits Creator',
+        name: 'Trade Compliance Lead',
+        role: 'Industrial Buyer',
         image: 'https://randomuser.me/api/portraits/men/7.jpg',
-        quote: 'Great work on tailfolio template. This is one of the best personal website that I have seen so far :)',
+        quote: 'Having lane signals and compliance context together reduced internal back-and-forth massively.',
     },
     {
         name: 'Shekinah Tshiokufila',
@@ -63,8 +63,8 @@ export default function WallOfLoveSection() {
             <div className="py-16 md:py-32">
                 <div className="mx-auto max-w-6xl px-6">
                     <div className="text-center">
-                        <h2 className="text-foreground text-4xl font-semibold">Loved by the Community</h2>
-                        <p className="text-muted-foreground mb-12 mt-4 text-balance text-lg">Harum quae dolore orrupti aut temporibus ariatur.</p>
+                        <h2 className="text-foreground text-4xl font-semibold">Used by modern trade teams</h2>
+                        <p className="text-muted-foreground mb-12 mt-4 text-balance text-lg">Built for importers, forwarders, and sourcing teams growing cross-border lanes.</p>
                     </div>
                     <div className="mt-8 grid gap-3 sm:grid-cols-2 md:mt-12 lg:grid-cols-3">
                         {testimonialChunks.map((chunk, chunkIndex) => (

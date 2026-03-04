@@ -16,10 +16,11 @@ import { useTheme } from "next-themes"
 
 
 const menuItems = [
-    { name: 'Features', href: '#link' },
-    { name: 'Solution', href: '#link' },
-    { name: 'Pricing', href: '#link' },
-    { name: 'About', href: '#link' },
+    { name: 'Features', href: '#features' },
+    { name: 'How It Works', href: '#how-it-works' },
+    { name: 'Pricing', href: '#pricing' },
+    { name: 'Resources', href: '#resources' },
+    { name: 'FAQ', href: '#faq' },
 ]
 
 export const HeroHeader = () => {
@@ -51,8 +52,8 @@ export const HeroHeader = () => {
                                 aria-label="home"
                                 className="flex items-center space-x-2">
                                 <ChatMaxingIconColoured />
-                                <span className="text-xl font-medium">Starter.diy</span>
-                                <Badge variant="outline" className="text-muted-foreground  text-xs">Demo</Badge>
+                                <span className="text-xl font-medium">Elite</span>
+                                <Badge variant="outline" className="text-muted-foreground text-xs">Live</Badge>
                             </Link>
 
                             <button
@@ -120,7 +121,7 @@ export const HeroHeader = () => {
                                         <Button
                                             size="sm"
                                             className={cn(isScrolled ? 'lg:inline-flex' : '')}>
-                                            <span>Get Started</span>
+                                            <span>Start Free Trial</span>
                                         </Button>
                                     </SignUpButton>
                                 </SignedOut>

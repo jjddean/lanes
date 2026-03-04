@@ -274,7 +274,7 @@ export default function SolutionsPage() {
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-4xl font-semibold mb-6">Ready to Transform Your Trade Operations?</h2>
             <p className="text-muted-foreground text-lg mb-8">
-              Start with a free trial and see how Starter.diy can automate your lead generation in minutes.
+              Start with a free trial and see how Elite can automate your lane discovery and lead generation in minutes.
             </p>
             <div className="flex items-center justify-center gap-4 flex-wrap">
               <SignedIn>
